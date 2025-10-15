@@ -35,21 +35,19 @@ jobs:
       
       # Étape pour générer le fichier index.html
       - name: Générer le fichier index.html
-        run: |
-          echo '<!DOCTYPE html>' > src/public/index.html
-          echo '<html lang="fr">' >> src/public/index.html
-          echo '<head>' >> src/public/index.html
-          echo '  <meta charset="UTF-8">' >> src/public/index.html
-          echo '  <title>Générateur de citations</title>' >> src/public/index.html
-          echo '  <link rel="stylesheet" href="style.css">' >> src/public/index.html
-          echo '</head>' >> src/public/index.html
-          echo '<body>' >> src/public/index.html
-          echo '  <h1>Générateur de citations</h1>' >> src/public/index.html
-          echo '  <blockquote id="citation">Chargement...</blockquote>' >> src/public/index.html
-          echo '  <button id="nouvelle">Nouvelle citation</button>' >> src/public/index.html
-          echo '  <script src="script.js"></script>' >> src/public/index.html
-          echo '</body>' >> src/public/index.html
-          echo '</html>' >> src/public/index.html
+        run: |    
+          echo 'async function chargerCitation() {' > src/public/script.js
+          echo '  const citationElement = document.getElementById("citation");' >> src/public/script.js
+          echo '  try {' >> src/public/script.js
+          echo '    const response = await fetch("https://zenquotes.io/api/random");' >> src/public/script.js
+          echo '    const data = await response.json();' >> src/public/script.js
+          echo '    citationElement.innerText = `${data[0].q} — ${data[0].a}`;' >> src/public/script.js
+          echo '  } catch (error) {' >> src/public/script.js
+          echo '    citationElement.innerText = "Impossible de charger la citation.";' >> src/public/script.js
+          echo '  }' >> src/public/script.js
+          echo '}' >> src/public/script.js
+          echo 'document.getElementById("nouvelle").addEventListener("click", chargerCitation);' >> src/public/script.js
+          echo 'window.addEventListener("load", chargerCitation);' >> src/public/script.js
       # Étape de déploiement
       - name: Déploiement sur GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
