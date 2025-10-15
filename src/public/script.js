@@ -11,3 +11,5 @@ async function chargerCitation() {
 
 document.getElementById("nouvelle").addEventListener("click", chargerCitation);
 window.onload = chargerCitation;
+
+// Initial load of a quote when the page is opened
