@@ -6,3 +6,4 @@ async function chargerCitation() {
 
 document.getElementById("nouvelle").addEventListener("click", chargerCitation);
 window.onload = chargerCitation;
+  <script src="script.js"></script>
