@@ -32,10 +32,32 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4
-      
-      # Étape pour générer le fichier index.html
-      - name: Générer le fichier index.html
-        run: |    
+
+      # Créer le dossier public si nécessaire
+      - name: Créer le dossier public
+        run: mkdir -p src/public
+
+      # Générer index.html
+      - name: Générer index.html
+        run: |
+          echo '<!DOCTYPE html>' > src/public/index.html
+          echo '<html lang="fr">' >> src/public/index.html
+          echo '<head>' >> src/public/index.html
+          echo '  <meta charset="UTF-8">' >> src/public/index.html
+          echo '  <title>Générateur de citations</title>' >> src/public/index.html
+          echo '  <link rel="stylesheet" href="style.css">' >> src/public/index.html
+          echo '</head>' >> src/public/index.html
+          echo '<body>' >> src/public/index.html
+          echo '  <h1>Générateur de citations</h1>' >> src/public/index.html
+          echo '  <blockquote id="citation">Chargement...</blockquote>' >> src/public/index.html
+          echo '  <button id="nouvelle">Nouvelle citation</button>' >> src/public/index.html
+          echo '  <script src="script.js"></script>' >> src/public/index.html
+          echo '</body>' >> src/public/index.html
+          echo '</html>' >> src/public/index.html
+
+      # Générer script.js
+      - name: Générer script.js
+        run: |
           echo 'async function chargerCitation() {' > src/public/script.js
           echo '  const citationElement = document.getElementById("citation");' >> src/public/script.js
           echo '  try {' >> src/public/script.js
@@ -48,7 +70,8 @@ jobs:
           echo '}' >> src/public/script.js
           echo 'document.getElementById("nouvelle").addEventListener("click", chargerCitation);' >> src/public/script.js
           echo 'window.addEventListener("load", chargerCitation);' >> src/public/script.js
-      # Étape de déploiement
+
+      # Déploiement sur GitHub Pages
       - name: Déploiement sur GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
