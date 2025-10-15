@@ -47,7 +47,7 @@ jobs:
           echo '  <h1>Générateur de citations</h1>' >> src/public/index.html
           echo '  <blockquote id="citation">Chargement...</blockquote>' >> src/public/index.html
           echo '  <button id="nouvelle">Nouvelle citation</button>' >> src/public/index.html
-          echo '  <script src="script.js"></script>' >> src/public/script.js
+          echo '  <script src="script.js"></script>' >> src/public/index.html
           echo '</body>' >> src/public/index.html
           echo '</html>' >> src/public/index.html
       # Étape de déploiement
