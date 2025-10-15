@@ -1,15 +1,16 @@
 async function chargerCitation() {
-  try {
-    // On passe par le proxy public allorigins.win
-    const response = await fetch("https://api.allorigins.win/raw?url=https://zenquotes.io/api/random");
-
-    const data = await response.json();
-    document.getElementById("citation").innerText = `${data[0].q} — ${data[0].a}`;
-  } catch (error) {
-    console.error("Erreur lors du chargement de la citation :", error);
-    document.getElementById("citation").innerText = "⚠️ Impossible de charger la citation.";
-  }
+  const response = await fetch("https://zenquotes.io/api/random");
+  const data = await response.json();
+  document.getElementById("citation").innerText = `${data[0].q} — ${data[0].a}`;
 }
-
+/*
 document.getElementById("nouvelle").addEventListener("click", chargerCitation);
-window.onload = chargerCitation;
+window.onload = chargerCitation;*/
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("nouvelle").addEventListener("click", chargerCitation);
+  chargerCitation();
+});
+
+
+
