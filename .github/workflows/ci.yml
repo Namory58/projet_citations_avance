@@ -1,4 +1,4 @@
-name: CI/CD Node.js - Générateur de citations avancé
+name: CI/CD Node.js - Générateur de citations
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
     needs: test
     steps:
       - uses: actions/checkout@v4
-      - run : echo " Build du projet reussi !"
+      - run: echo "Build du projet réussi !"
 
   deploy:
     name: Déploiement sur GitHub Pages
@@ -36,4 +36,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: ./src/public  # <-- mets ici le dossier réel de ton index.html
